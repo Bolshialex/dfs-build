@@ -65,14 +65,16 @@ public class Build {
     Set<Vertex<T>> seen = new HashSet<>();
     printSelfLoopers(vertex, seen);
   }
+
   public static <T> void printSelfLoopers(Vertex<T> vertex, Set<Vertex<T>> seen) {
     if(vertex == null || seen.contains(vertex)) return;
 
     seen.add(vertex);
-    System.out.println(vertex.data);
 
     for (Vertex<T> neighbor : vertex.neighbors) {
-      printSelfLoopers(neighbor, seen);
+      if(neighbor == vertex){
+        System.out.println(vertex.data);
+      }printSelfLoopers(neighbor, seen);
     }
   }
 
